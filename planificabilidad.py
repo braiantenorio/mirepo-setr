@@ -12,14 +12,17 @@ class Tarea:
     t: int
     d: int
 
-def tests(tareas):
+def tests(tareas, streal):
+    print("----------------------------------------")
+    print()
+    print("STR: {("+ "),(".join(streal)+ ")}")
     print(f"Hiperperiodo: {hiperperiodo(tareas)}")
-    print(f"Factor de utilidad: {fu(tareas)}")
-    print(f"Cota de Liu para RM/DM: {liu_rm_dm(tareas)}")
-    print(f"Cota de Bini para RM: {bini(tareas)}")
+    print(f"Factor de utilidad: {round(fu(tareas),2)}")
+    print(f"Cota de Liu para RM/DM: {round(liu_rm_dm(tareas),2)}")
+    print(f"Cota de Bini para RM: {round(bini(tareas),2)}")
     print(f"WCRT: {joseph(tareas)}")
 
-    print("\n")
+    print()
 
 def hiperperiodo(tareas):
     last = 1
@@ -64,9 +67,6 @@ def joseph(tareas):
         results.append(result)
     return results
 
-
-
-
 with open('input.csv', newline="") as csv_file:
     reader = csv.reader(csv_file, delimiter=';')
     for row in reader:
@@ -74,6 +74,6 @@ with open('input.csv', newline="") as csv_file:
         for item in row:
             c, t, d = map(int, item.split(","))
             tareas.append(Tarea(c, t, d))
-        tests(tareas)
+        tests(tareas,row)
 
 
