@@ -15,9 +15,10 @@ class Tarea:
 def tests(tareas, streal):
     print("----------------------------------------")
     print()
+
     print("STR: {("+ "),(".join(streal)+ ")}")
     print(f"Hiperperiodo: {hiperperiodo(tareas)}")
-    print(f"Factor de utilidad: {round(fu(tareas),2)}")
+    print(f"Factor de utilización: {round(fu(tareas),2)}")
     print(f"Cota de Liu para RM/DM: {round(liu_rm_dm(tareas),2)}")
     print(f"Cota de Bini para RM: {round(bini(tareas),2)}")
     print(f"WCRT: {joseph(tareas)}")
