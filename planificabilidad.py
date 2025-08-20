@@ -16,7 +16,7 @@ def tests(tareas, streal):
     print("----------------------------------------")
     print()
 
-    print("STR: {("+ "),(".join(streal)+ ")}")
+    print("STR: ("+ "),(".join(streal)+ ")")
     print(f"Hiperperiodo: {hiperperiodo(tareas)}")
     print(f"Factor de utilización: {round(fu(tareas),2)}")
     print(f"Cota de Liu para RM/DM: {round(liu_rm_dm(tareas),2)}")
@@ -52,6 +52,8 @@ def joseph(tareas):
     results = []
     index = 0
     for tarea in tareas:
+        ciclos=0
+        techos=0
         t=0
         anteriores = tareas[0:index] 
         result = 0
