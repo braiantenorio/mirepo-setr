@@ -28,8 +28,7 @@ def tests(tareas, streal):
 def hiperperiodo(tareas):
     last = 1
     for tarea in tareas:
-        current =  math.lcm(tarea.t,last)
-        last = current
+        last =  math.lcm(tarea.t,last)
     return last
 
 def fu(tareas):
