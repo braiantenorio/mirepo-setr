@@ -16,12 +16,14 @@ def tests(tareas, streal):
     print("----------------------------------------")
     print()
 
-    print("STR: ("+ "),(".join(streal)+ ")")
+    print("[+] STR: ("+ "),(".join(streal)+ ")")
     print(f"Hiperperiodo: {hiperperiodo(tareas)}")
     print(f"Factor de utilización: {round(fu(tareas),2)}")
     print(f"Cota de Liu para RM/DM: {round(liu_rm_dm(tareas),2)}")
     print(f"Cota de Bini para RM: {round(bini(tareas),2)}")
-    print(f"WCRT: {joseph(tareas)}")
+    print("[-] WCRT: (t, iteraciones, techos calculados)")
+    print(f"Joshep: {joseph(tareas)}")
+    print(f"RTA: {rta(tareas)}")
 
     print()
 
@@ -51,23 +53,50 @@ def joseph(tareas):
     results = []
     index = 0
     for tarea in tareas:
-        ciclos=0
+        iteraciones=0
         techos=0
         t=0
         anteriores = tareas[0:index] 
         result = 0
         while True:
+            iteraciones +=1
             sumatoria = 0
             for ant in anteriores:
                 sumatoria = sumatoria + (ant.c * math.ceil(t/ant.t))
+                techos +=1
             result = tarea.c + sumatoria
             if result == t:
                 index+=1
                 break
             t=result
 
-        results.append(result)
+        results.append((result,iteraciones,techos))
     return results
+
+def rta(tareas):
+    results = []
+    index = 0
+    for tarea in tareas:
+        iteraciones=0
+        techos=0
+        t = (results[-1][0] + tarea.c) if results else tarea.c
+        anteriores = tareas[0:index] 
+        result = 0
+        while True:
+            iteraciones += 1
+            sumatoria = 0
+            for ant in anteriores:
+                sumatoria = sumatoria + (ant.c * math.ceil(t/ant.t))
+                techos += 1
+            result = tarea.c + sumatoria
+            if result == t:
+                index+=1
+                break
+            t=result
+
+        results.append((result,iteraciones,techos))
+    return results
+
 
 with open('input.csv', newline="") as csv_file:
     reader = csv.reader(csv_file, delimiter=';')
