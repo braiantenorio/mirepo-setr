@@ -21,9 +21,10 @@ def tests(tareas, streal):
     print(f"Factor de utilización: {round(fu(tareas),2)}")
     print(f"Cota de Liu para RM/DM: {round(liu_rm_dm(tareas),2)}")
     print(f"Cota de Bini para RM: {round(bini(tareas),2)}")
-    print("[-] WCRT: (t, iteraciones, techos calculados)")
+    print("WCRT: (t, iteraciones, techos calculados)")
     print(f"Joshep: {joseph(tareas)}")
     print(f"RTA: {rta(tareas)}")
+    print(f"Primera ranura libre: {ranuras_vacias(tareas)}")
 
     print()
 
@@ -96,6 +97,27 @@ def rta(tareas):
 
         results.append((result,iteraciones,techos))
     return results
+
+def ranuras_vacias(tareas):
+    results = []
+    index = 1
+    for tarea in tareas:
+        t = (results[-1] - 1) if results else tarea.c
+        anteriores = tareas[0:index] 
+        result = 0
+        while True:
+            sumatoria = 0
+            for ant in anteriores:
+                sumatoria = sumatoria + (ant.c * math.ceil(t/ant.t))
+            result = 1 + sumatoria
+            if result == t:
+                index+=1
+                break
+            t=result
+
+        results.append(result)
+    return results
+
 
 
 with open('input.csv', newline="") as csv_file:
