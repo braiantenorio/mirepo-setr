@@ -3,6 +3,7 @@
 import csv
 import sys
 import math
+#from tabulate import tabulate
 
 from dataclasses import dataclass
 
@@ -21,8 +22,9 @@ def tests(tareas, streal):
     print(f"Factor de utilización: {round(fu(tareas),2)}")
     print(f"Cota de Liu para RM/DM: {round(liu_rm_dm(tareas),2)}")
     print(f"Cota de Bini para RM: {round(bini(tareas),2)}")
-    print("WCRT: (t, iteraciones, techos calculados)")
+    print("WCRT: (R, Iteraciones, Techos calculados)")
     print(f"Joshep: {joseph(tareas)}")
+    #print(tabulate(zip(joseph(tareas),rta(tareas)), headers= ["R","Iteraciones","Techos","R","Iteraciones","Techos"]))
     print(f"RTA: {rta(tareas)}")
     print(f"Primera ranura libre: {ranuras_vacias(tareas)}")
 
